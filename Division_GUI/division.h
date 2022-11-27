@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include <QDebug>
 
 template<typename T>
 size_t finder(const std::vector<T>& vect); // find the first non-zero term's index
@@ -49,7 +50,7 @@ class PowerComputation
 {
 public:
     PowerComputation(std::shared_ptr<Numerator>num, std::shared_ptr<Denom>denom);// take in pointers
-    friend std::ostream& operator<<(std::ostream& output, const PowerComputation&);
+    friend QDebug operator<< (QDebug output, const PowerComputation&);
 private:
     std::shared_ptr<Numerator>num;
     std::shared_ptr<Denom>denom;

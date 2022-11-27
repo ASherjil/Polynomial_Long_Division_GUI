@@ -196,7 +196,7 @@ void Denom::print()const
 PowerComputation::PowerComputation(std::shared_ptr<Numerator>num, std::shared_ptr<Denom>denom)
     : num(std::move(num)), denom(std::move(denom)) {}
 
-std::ostream& operator<<(std::ostream& output, const PowerComputation& pow)
+QDebug operator<< (QDebug output, const PowerComputation& pow)
 {
     int minus{};// arbitrary integer for power
 
