@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "gui_app_handler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -13,9 +14,12 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow();  
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    Gui_app_handler m_inputDataHandle;
 };
 #endif // MAINWINDOW_H
