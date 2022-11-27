@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include "gui_app_handler.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,8 +19,11 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_toolButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QMessageBox* helpDialog;
     Gui_app_handler m_inputDataHandle;
 };
 #endif // MAINWINDOW_H
