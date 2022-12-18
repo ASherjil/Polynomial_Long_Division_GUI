@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
                                                         this}}
 {
     ui->setupUi(this);
+    QFont font = helpDialog->font();
+    font.setPointSize(13);
+    helpDialog->setFont(font);
 }
 
 MainWindow::~MainWindow()

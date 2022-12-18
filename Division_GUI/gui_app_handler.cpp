@@ -4,16 +4,24 @@
 #include "gui_app_handler.h"
 
 // Initialising static member variable
-QRegularExpression Gui_app_handler::m_regex = QRegularExpression("\\^-?\\d+");
+QRegularExpression Gui_app_handler::m_regex1 = QRegularExpression("\\^-?\\d+");
+QRegularExpression Gui_app_handler::m_regex2 = QRegularExpression("((-|\\+)?[0-9]+[a-z]\\^(-|\\+)?[0-9]+)+");
 
 void Gui_app_handler::parseInputData(QString &&repititions,
                                      QString &&numerator,
                                      QString &&denominator)
 {
+    if (!repititions.size() || !numerator.size() || !denominator.size()){
+        return;
+    }
+
     QString _repititions = repititions.remove(' ');
     QString _numerator   = numerator  .remove(' ');
     QString _denominator = denominator.remove(' ');
 
+    if (!verifyPolynomial(_numerator) || !verifyPolynomial(_denominator)){
+        return;
+    }
 
     m_repititions = _repititions.toInt();
     // parse and store the input data into the member variables
@@ -47,7 +55,7 @@ void Gui_app_handler::parseInputData(QString &&repititions,
 QList<double> Gui_app_handler::parseInputData(QString &data)
 {
     QChar coeff = checkCoeff(data);
-    data.remove(m_regex);
+    data.remove(m_regex1);
     data.remove('+');
     data.remove('-');
     QList<QString> _splitter = data.split(coeff);
@@ -73,4 +81,44 @@ QChar Gui_app_handler::checkCoeff(const QString &num_den)
         }
     }
     return num_den[coeffIndex];
+}
+
+int Gui_app_handler::maxPower(const QString &num_den){
+    int startIndex{};
+    int endIndex{};
+
+    for (startIndex = 0;startIndex<num_den.size(); ++startIndex){
+        if (num_den[startIndex] == '^'){
+            if (num_den[startIndex+1] == '-'){
+                for (endIndex =startIndex+2; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
+                    ++endIndex){}
+                    startIndex +=2;
+                    break; // break out of the loop
+            }
+            else if (num_den[startIndex+1] == '+'){
+                for (endIndex =startIndex+2; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
+                    ++endIndex){}
+                    startIndex +=2;
+                    break; // break out of the loop
+            }
+            else{
+                for (endIndex =startIndex+1; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
+                    ++endIndex){}
+                    startIndex +=1;
+                    break; // break out of the loop
+            }
+        }
+    }
+    std::string _num_den = num_den.toStdString();
+    std::string number(_num_den.begin()+startIndex, _num_den.begin()+endIndex);
+    return std::stoi(number);
+}
+
+bool Gui_app_handler::verifyPolynomial(const QString &polynomial){
+    QRegularExpressionMatch match = m_regex2.match(polynomial);
+    return match.hasMatch();
+}
+
+void Gui_app_handler::adjustPolynomialPower(QString &_num, QString &_den){
+
 }

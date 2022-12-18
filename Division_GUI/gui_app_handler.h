@@ -25,6 +25,29 @@ public:
      * @return The coefficient extracted from the user input
      */
     QChar checkCoeff(const QString& num_den);
+
+    /**
+     * @brief maxPower A function that returns the max power
+     * in the format "15x^1+1x^0..."
+     * @param num_den A required string
+     * @return the maximum power found
+     */
+    int maxPower(const QString& num_den);
+
+    /**
+     * @brief verifyPolynomial A function that uses regex to verify if the user
+     * has entered a polynomial in the valid form.
+     * @param polynomial The user input in string format
+     * @return returns true if the polynomial is valid
+     */
+    bool verifyPolynomial(const QString& polynomial);
+
+    /**
+     * @brief adjustPolynomialPower The function used for adjusting the polynomial
+     * power once the user input has been verified
+     * @param polynomial
+     */
+    void adjustPolynomialPower(QString& _num, QString& _den);
 private:
     /**
      * @brief parseInputData A private helper function that modifies
@@ -41,8 +64,12 @@ private:
 
     /// The regex static variable, to improve performance. This removes
     /// all the power from the input numerator/denominator.
-    static QRegularExpression m_regex;
+    static QRegularExpression m_regex1;
+
+    /// The regex static variable, to validate polynomial
+    static QRegularExpression m_regex2;
 };
+
 
 
 
