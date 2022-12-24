@@ -32,7 +32,8 @@ void MainWindow::on_pushButton_clicked()
 {
     m_inputDataHandle.parseInputData(std::move(ui->plainTextEdit_3->toPlainText()),
                                      std::move(ui->plainTextEdit->toPlainText()  ),
-                                     std::move(ui->plainTextEdit_2->toPlainText()));
+                                     std::move(ui->plainTextEdit_2->toPlainText()),
+                                     ui->label_5);
 }
 
 

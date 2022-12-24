@@ -2,7 +2,7 @@
 #define GUI_APP_HANDLER_H
 
 #include <QVector>
-
+#include <QLabel>
 
 class Gui_app_handler
 {
@@ -16,7 +16,8 @@ public:
      */
     void parseInputData(QString&& repititions,
                         QString&& numerator,
-                        QString&& denominator);
+                        QString&& denominator,
+                        QLabel* errorOutput);
 
     /**
      * @brief checkCoeff A function to find and return the coefficient from the
@@ -59,7 +60,6 @@ private:
     /// The regex static variable, to improve performance. This removes
     /// all the power from the input numerator/denominator.
     static QRegularExpression m_regex1;
-
 };
 
 

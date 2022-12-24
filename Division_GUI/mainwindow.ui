@@ -65,12 +65,12 @@
      <rect>
       <x>30</x>
       <y>310</y>
-      <width>67</width>
+      <width>151</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Result:</string>
+     <string>Computation result:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -120,6 +120,19 @@
     </property>
     <property name="text">
      <string>How to use</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>310</y>
+      <width>671</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

@@ -9,9 +9,13 @@ QRegularExpression Gui_app_handler::m_regex1 = QRegularExpression("\\^-?\\d+");
 
 void Gui_app_handler::parseInputData(QString &&repititions,
                                      QString &&numerator,
-                                     QString &&denominator)
+                                     QString &&denominator,
+                                     QLabel* errorOutput)
 {
     if (!repititions.size() || !numerator.size() || !denominator.size()){
+        errorOutput->setText("Cannot compute result, empty fields detected.\n"
+                             "Please click the 'HELP' button for more information.");
+        errorOutput->setAlignment(Qt::AlignJustify);
         return;
     }
 
@@ -20,6 +24,9 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     QString _denominator = denominator.remove(' ');
 
     if (!verifyPolynomial(_numerator) || !verifyPolynomial(_denominator)){
+        errorOutput->setText("Cannot compute result, either the numerator or denominator is entered incorrectly.\n"
+                             "Please click the 'HELP' button for more information.");
+        errorOutput->setAlignment(Qt::AlignJustify);
         return;
     }
 
