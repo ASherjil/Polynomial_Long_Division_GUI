@@ -8,12 +8,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow), helpDialog{new QMessageBox{QMessageBox::NoIcon,
                                                          "Help",
                                                          "Enter all the powers using keyboards format.\n"
-                                                         "For example: '4x^2 - 5x^1 + 6x^0 - 7x^-1' is "
+                                                         "For example: '4x^2 - 0x^1 + 6x^0 - 7x^-1' is "
                                                          "correct. Make sure to always enter the power of "
                                                          "the coefficient even if its 0 or 1. Entering using"
                                                          " whitespaces is OKAY.",
-                                                        QMessageBox::Cancel,
-                                                        this}}
+                                                         QMessageBox::Cancel,
+                                                         this}}
 {
     ui->setupUi(this);
     QFont font = helpDialog->font();

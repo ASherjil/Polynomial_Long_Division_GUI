@@ -1,11 +1,11 @@
 #include <QDebug>
 #include <QRegularExpression>
+#include <regex>
 #include "division.h"
 #include "gui_app_handler.h"
 
 // Initialising static member variable
 QRegularExpression Gui_app_handler::m_regex1 = QRegularExpression("\\^-?\\d+");
-QRegularExpression Gui_app_handler::m_regex2 = QRegularExpression("((-|\\+)?[0-9]+[a-z]\\^(-|\\+)?[0-9]+)+");
 
 void Gui_app_handler::parseInputData(QString &&repititions,
                                      QString &&numerator,
@@ -24,6 +24,23 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     }
 
     m_repititions = _repititions.toInt();
+
+    int numPower = maxPower(_numerator);
+    int denPower = maxPower(_denominator);
+
+    if (numPower < denPower){
+        int difference = denPower - numPower;
+        for (int i{}; i< difference; ++i){
+            m_numerator.prepend(0);
+        }
+    }
+    else if(numPower > denPower){
+        int difference = numPower - denPower;
+        for (int i{}; i< difference; ++i){
+            m_denominator.prepend(0);
+        }
+    }
+
     // parse and store the input data into the member variables
     m_numerator   = parseInputData(_numerator);
     m_denominator = parseInputData(_denominator);
@@ -56,14 +73,14 @@ QList<double> Gui_app_handler::parseInputData(QString &data)
 {
     QChar coeff = checkCoeff(data);
     data.remove(m_regex1);
-    data.remove('+');
-    data.remove('-');
     QList<QString> _splitter = data.split(coeff);
     QList<double> ret;
 
     // transform into double from QString
     for (int i{};i<_splitter.size();++i){
-        ret.push_back(_splitter[i].toDouble());
+        if (_splitter[i] != ""){
+            ret.push_back(_splitter[i].toDouble());
+        }
     }
 
     return ret;
@@ -115,10 +132,7 @@ int Gui_app_handler::maxPower(const QString &num_den){
 }
 
 bool Gui_app_handler::verifyPolynomial(const QString &polynomial){
-    QRegularExpressionMatch match = m_regex2.match(polynomial);
-    return match.hasMatch();
+    const std::regex _regex("((-|\\+)?[0-9]+[a-z]\\^(-|\\+)?[0-9]+)+");
+    return regex_match(polynomial.toStdString(), _regex);
 }
 
-void Gui_app_handler::adjustPolynomialPower(QString &_num, QString &_den){
-
-}

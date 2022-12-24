@@ -36,18 +36,12 @@ public:
 
     /**
      * @brief verifyPolynomial A function that uses regex to verify if the user
-     * has entered a polynomial in the valid form.
+     * has entered a polynomial in the valid form. (For some reason Qt regex is not working
+     * therefore std::regex is used).
      * @param polynomial The user input in string format
      * @return returns true if the polynomial is valid
      */
     bool verifyPolynomial(const QString& polynomial);
-
-    /**
-     * @brief adjustPolynomialPower The function used for adjusting the polynomial
-     * power once the user input has been verified
-     * @param polynomial
-     */
-    void adjustPolynomialPower(QString& _num, QString& _den);
 private:
     /**
      * @brief parseInputData A private helper function that modifies
@@ -66,8 +60,6 @@ private:
     /// all the power from the input numerator/denominator.
     static QRegularExpression m_regex1;
 
-    /// The regex static variable, to validate polynomial
-    static QRegularExpression m_regex2;
 };
 
 

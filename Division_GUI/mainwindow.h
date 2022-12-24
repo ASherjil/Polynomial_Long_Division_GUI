@@ -18,9 +18,7 @@ public:
     ~MainWindow();  
 private slots:
     void on_pushButton_clicked();
-
     void on_toolButton_clicked();
-
 private:
     Ui::MainWindow *ui;
     QMessageBox* helpDialog;

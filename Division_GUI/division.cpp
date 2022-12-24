@@ -173,22 +173,22 @@ Numerator& Numerator::operator/(Denom& denom)
 
 void Numerator::print()const
 {
-    std::cout << "[ ";
+    qDebug() << "[ ";
     for (int i{}; i < numerator.size(); ++i)
     {
-        std::cout << numerator[i] << "z^" << max - i << " ";
+       qDebug() << numerator[i] << "z^" << max - i << " ";
     }
-    std::cout << " ]";
+    qDebug() << " ]";
 }
 
 void Denom::print()const
 {
-    std::cout << "[ ";
+    qDebug() << "[ ";
     for (int i{}; i < denominator.size(); ++i)
     {
-        std::cout << denominator[i] << "z^" << max - i << " ";
+        qDebug() << denominator[i] << "z^" << max - i << " ";
     }
-    std::cout << " ]";
+    qDebug() << " ]";
 }
 
 
