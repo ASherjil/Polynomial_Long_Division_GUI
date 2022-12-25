@@ -1,11 +1,15 @@
 #include <QDebug>
 #include <QRegularExpression>
 #include <regex>
-#include "division.h"
 #include "gui_app_handler.h"
 
 // Initialising static member variable
 QRegularExpression Gui_app_handler::m_regex1 = QRegularExpression("\\^-?\\d+");
+
+
+Gui_app_handler::Gui_app_handler()
+    :m_divisor{new Divisor()}
+{}
 
 void Gui_app_handler::parseInputData(QString &&repititions,
                                      QString &&numerator,
@@ -52,6 +56,13 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     m_numerator   = parseInputData(_numerator);
     m_denominator = parseInputData(_denominator);
 
+
+    m_divisor->setParameters(m_numerator, m_denominator, checkCoeff(_numerator), std::max(numPower, denPower));
+    m_divisor->setRepititions(m_repititions);
+    m_divisor->performDivision();
+    qDebug() << m_divisor->getResult();
+
+ /*
     QVector<double> _temp1 =m_numerator.toVector();
     QVector<double> _temp2 =m_denominator.toVector();
     std::vector<double> _temp11(_temp1.begin(), _temp1.end());
@@ -74,6 +85,7 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     //------------------------display result
 
     qDebug() << displayPower;
+ */
 }
 
 QList<double> Gui_app_handler::parseInputData(QString &data)
@@ -89,7 +101,6 @@ QList<double> Gui_app_handler::parseInputData(QString &data)
             ret.push_back(_splitter[i].toDouble());
         }
     }
-
     return ret;
 }
 

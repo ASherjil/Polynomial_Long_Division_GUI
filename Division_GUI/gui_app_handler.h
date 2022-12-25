@@ -3,10 +3,14 @@
 
 #include <QVector>
 #include <QLabel>
+#include "division.h"
 
 class Gui_app_handler
 {
 public:
+
+    Gui_app_handler();
+
     /**
      * @brief parseInputData A public function to receive input data
      * from the main window.
@@ -60,6 +64,11 @@ private:
     /// The regex static variable, to improve performance. This removes
     /// all the power from the input numerator/denominator.
     static QRegularExpression m_regex1;
+
+    /**
+     * @brief m_divisor A pointer to the class that is responsible for the heavy lifting.
+     */
+    Divisor* m_divisor;
 };
 
 

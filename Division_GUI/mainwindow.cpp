@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     QFont font = helpDialog->font();
     font.setPointSize(13);
     helpDialog->setFont(font);
+
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::onPushButtonClicked);
+    connect(ui->toolButton, &QToolButton::clicked, this, &MainWindow::onToolButtonClicked);
 }
 
 MainWindow::~MainWindow()
@@ -28,7 +31,7 @@ MainWindow::~MainWindow()
 
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::onPushButtonClicked()
 {
     m_inputDataHandle.parseInputData(std::move(ui->plainTextEdit_3->toPlainText()),
                                      std::move(ui->plainTextEdit->toPlainText()  ),
@@ -37,7 +40,7 @@ void MainWindow::on_pushButton_clicked()
 }
 
 
-void MainWindow::on_toolButton_clicked()
+void MainWindow::onToolButtonClicked()
 {
     helpDialog->exec();
 }
