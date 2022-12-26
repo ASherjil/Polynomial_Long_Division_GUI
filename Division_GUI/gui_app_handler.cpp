@@ -65,31 +65,6 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     m_divisor->setRepititions(m_repititions);
     m_divisor->performDivision();
     qDebug() << m_divisor->getResult();
-
- /*
-    QVector<double> _temp1 =m_numerator.toVector();
-    QVector<double> _temp2 =m_denominator.toVector();
-    std::vector<double> _temp11(_temp1.begin(), _temp1.end());
-    std::vector<double> _temp21(_temp2.begin(), _temp2.end());
-
-    Numerator num1(_temp11, m_repititions, 0);
-    Denom     den1(_temp21, 0);
-
-
-    num1.print();
-    qDebug() << "/";
-    den1.print();
-    qDebug() << "=\n";
-
-
-    //-------------------------create pointers
-    std::shared_ptr<Numerator>ptr1 = std::make_shared<Numerator>((num1 / den1)); // perform the calculation
-    std::shared_ptr<Denom>ptr2 = std::make_shared<Denom>(den1);
-    PowerComputation displayPower(ptr1, ptr2);
-    //------------------------display result
-
-    qDebug() << displayPower;
- */
 }
 
 QList<double> Gui_app_handler::parseInputData(QString &data)
