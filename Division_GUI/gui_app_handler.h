@@ -4,11 +4,11 @@
 #include <QVector>
 #include <QLabel>
 #include "division.h"
+#include "qmessagebox.h"
 
 class Gui_app_handler
 {
 public:
-
     Gui_app_handler();
 
     /**
@@ -69,6 +69,12 @@ private:
      * @brief m_divisor A pointer to the class that is responsible for the heavy lifting.
      */
     Divisor* m_divisor;
+
+    /**
+     * @brief m_displayResult Opens a dialog to display the computed result,
+     * if computation is successfull.
+     */
+    QMessageBox* m_displayResult;
 };
 
 

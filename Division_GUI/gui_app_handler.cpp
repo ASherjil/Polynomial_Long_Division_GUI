@@ -8,8 +8,10 @@ QRegularExpression Gui_app_handler::m_regex1 = QRegularExpression("\\^-?\\d+");
 
 
 Gui_app_handler::Gui_app_handler()
-    :m_divisor{new Divisor()}
-{}
+    :m_divisor{new Divisor()}, m_displayResult{new QMessageBox{QMessageBox::NoIcon,
+                                                               "Result",
+                                                               "",
+                                                               QMessageBox::Cancel}} {}
 
 void Gui_app_handler::parseInputData(QString &&repititions,
                                      QString &&numerator,
@@ -65,6 +67,9 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     m_divisor->setRepititions(m_repititions);
     m_divisor->performDivision();
     qDebug() << m_divisor->getResult();
+
+    m_displayResult->setText(m_divisor->getResult());
+    m_displayResult->exec();
 }
 
 QList<double> Gui_app_handler::parseInputData(QString &data)

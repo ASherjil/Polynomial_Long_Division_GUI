@@ -22,6 +22,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QMessageBox* helpDialog;
-    Gui_app_handler m_inputDataHandle;
+    Gui_app_handler* m_inputDataHandle;
 };
 #endif // MAINWINDOW_H
