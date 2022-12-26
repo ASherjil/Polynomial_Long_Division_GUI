@@ -309,10 +309,17 @@ void Divisor::performDivision()
     QList<double> result;
     QList<double> multipliedDenom;
     double multiplier{};
+    int largestLength = std::max(m_Dnumerator.size(), m_Ddenominator.size());
+
+    m_Dresult.clear(); // clear before adding new data
 
     // Adjust numerator and denominator if the denominator does not have a leading 1
     adjustDenominator();
     QList<double> tempNum = m_Dnumerator;
+
+    qDebug()<<"Adjusted data:";
+    printDebugger(m_Dnumerator);
+    printDebugger(m_Ddenominator);
 
 //  case 1: Numerator and Denom both have non-zeroes first element
     if (m_Dnumerator[0] && m_Ddenominator[0]){
@@ -323,11 +330,12 @@ void Divisor::performDivision()
 
 
             multipliedDenom = multiplier * m_Ddenominator;
-            multipliedDenom.resize(tempNum.size());
+            multipliedDenom.resize(largestLength);
+            tempNum.resize(largestLength);
 
             tempNum = tempNum - multipliedDenom;
 
-            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](int i) { return i==0; });
+            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](double i) { return i == 0.0; });
 
             if (zeros){
                 break; // this division is complete
@@ -338,10 +346,10 @@ void Divisor::performDivision()
         int power{};
         for (int i{};i<result.size();++i){
             if (result[i] > 0){
-                m_Dresult += QString("%1%2^%3 + ").arg(result[0]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("%1%2^%3 + ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             else{
-                m_Dresult += QString("%1%2^%3 ").arg(result[0]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("%1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             power--;
         }
@@ -367,12 +375,15 @@ void Divisor::performDivision()
             m_Dnumerator.resize(m_Ddenominator.size());
         }
 
+        tempNum = m_Dnumerator;
+
         for (int i{}; i<m_Drepititions; ++i){
             multiplier = tempNum[0] / m_Ddenominator[0];
             result.push_back(multiplier);
 
             multipliedDenom = multiplier * m_Ddenominator;
-            multipliedDenom.resize(tempNum.size());
+            multipliedDenom.resize(largestLength);
+            tempNum.resize(largestLength);
 
             tempNum = tempNum - multipliedDenom;
 
@@ -384,13 +395,13 @@ void Divisor::performDivision()
             tempNum.removeFirst();
         }
 
-        int power = m_DmaxPower - rotation;
+        int power = -1* rotation;
         for (int i{};i<result.size();++i){
             if (result[i] > 0){
-                m_Dresult += QString("%1%2^%3 + ").arg(result[0]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("%1%2^%3 + ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             else{
-                m_Dresult += QString("%1%2^%3 ").arg(result[0]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("%1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             power--;
         }
@@ -421,7 +432,8 @@ void Divisor::performDivision()
             result.push_back(multiplier);
 
             multipliedDenom = multiplier * m_Ddenominator;
-            multipliedDenom.resize(tempNum.size());
+            multipliedDenom.resize(largestLength);
+            tempNum.resize(largestLength);
 
             tempNum = tempNum - multipliedDenom;
 
@@ -433,13 +445,13 @@ void Divisor::performDivision()
             tempNum.removeFirst();
         }
 
-        int power = rotation+1;
+        int power = rotation;
         for (int i{};i<result.size();++i){
             if (result[i] > 0){
-                m_Dresult += QString("%1%2^%3 + ").arg(result[0]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("%1%2^%3 + ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             else{
-                m_Dresult += QString("%1%2^%3 ").arg(result[0]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("%1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             power--;
         }
@@ -469,4 +481,10 @@ void Divisor::adjustDenominator()
 QString Divisor::getResult() const
 {
     return m_Dresult;
+}
+
+void printDebugger(const QList<double> &list){
+    for (int i{};i<list.size();++i){
+        qDebug()<<list[i]<<" , ";
+    }
 }

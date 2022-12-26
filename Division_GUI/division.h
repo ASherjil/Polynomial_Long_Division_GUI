@@ -34,6 +34,9 @@ QList<double> operator*(double multiplier, const QList<double>& rhs);
  */
 QList<double> operator/(const QList<double> &num, double denom);
 
+
+void printDebugger(const QList<double>& list);
+
 class Divisor{
 public:
     void setParameters(const QList<double>& numerator, const QList<double>& denominator, QChar coeff, int maxPower);

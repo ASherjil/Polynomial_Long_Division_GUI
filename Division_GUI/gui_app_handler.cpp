@@ -39,6 +39,10 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     int numPower = maxPower(_numerator);
     int denPower = maxPower(_denominator);
 
+    // parse and store the input data into the member variables
+    m_numerator   = parseInputData(_numerator);
+    m_denominator = parseInputData(_denominator);
+
     if (numPower < denPower){
         int difference = denPower - numPower;
         for (int i{}; i< difference; ++i){
@@ -52,10 +56,10 @@ void Gui_app_handler::parseInputData(QString &&repititions,
         }
     }
 
-    // parse and store the input data into the member variables
-    m_numerator   = parseInputData(_numerator);
-    m_denominator = parseInputData(_denominator);
 
+    qDebug()<<"Parsed data:";
+    printDebugger(m_numerator);
+    printDebugger(m_denominator);
 
     m_divisor->setParameters(m_numerator, m_denominator, checkCoeff(_numerator), std::max(numPower, denPower));
     m_divisor->setRepititions(m_repititions);
@@ -108,11 +112,25 @@ QChar Gui_app_handler::checkCoeff(const QString &num_den)
 {
     int coeffIndex{};
     bool conversionSatus = true;
-    for (int i{};i<num_den.size();++i){
-        QString(num_den[i]).toInt(&conversionSatus, 10);
-        if (conversionSatus == false){ // the first non-number found
-            coeffIndex = i;
-            break;
+    QChar plus  = '+';
+    QChar minus = '-';
+
+    if (num_den[0] == plus || num_den[0] == minus){
+        for (int i = 1;i<num_den.size();++i){
+            QString(num_den[i]).toInt(&conversionSatus, 10);
+            if (conversionSatus == false){ // the first non-number found
+                coeffIndex = i;
+                break;
+            }
+        }
+    }
+    else{
+        for (int i{};i<num_den.size();++i){
+            QString(num_den[i]).toInt(&conversionSatus, 10);
+            if (conversionSatus == false){ // the first non-number found
+                coeffIndex = i;
+                break;
+            }
         }
     }
     return num_den[coeffIndex];
@@ -127,19 +145,19 @@ int Gui_app_handler::maxPower(const QString &num_den){
             if (num_den[startIndex+1] == '-'){
                 for (endIndex =startIndex+2; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
                     ++endIndex){}
-                    startIndex +=2;
+                    startIndex++;
                     break; // break out of the loop
             }
             else if (num_den[startIndex+1] == '+'){
                 for (endIndex =startIndex+2; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
                     ++endIndex){}
-                    startIndex +=2;
+                    startIndex++;
                     break; // break out of the loop
             }
             else{
                 for (endIndex =startIndex+1; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
                     ++endIndex){}
-                    startIndex +=1;
+                    startIndex++;
                     break; // break out of the loop
             }
         }
