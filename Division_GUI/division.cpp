@@ -88,10 +88,10 @@ void Divisor::performDivision()
         int power{};
         for (int i{};i<result.size();++i){
             if (result[i] > 0){
-                m_Dresult += QString("%1%2^%3 + ").arg(result[i]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("+ %1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             else{
-                m_Dresult += QString("%1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString(" %1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             power--;
         }
@@ -140,10 +140,10 @@ void Divisor::performDivision()
         int power = -1* rotation;
         for (int i{};i<result.size();++i){
             if (result[i] > 0){
-                m_Dresult += QString("%1%2^%3 + ").arg(result[i]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("+ %1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             else{
-                m_Dresult += QString("%1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString(" %1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             power--;
         }
@@ -190,10 +190,10 @@ void Divisor::performDivision()
         int power = rotation;
         for (int i{};i<result.size();++i){
             if (result[i] > 0){
-                m_Dresult += QString("%1%2^%3 + ").arg(result[i]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString("+ %1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             else{
-                m_Dresult += QString("%1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
+                m_Dresult += QString(" %1%2^%3 ").arg(result[i]).arg(m_Dcoeff).arg(power);
             }
             power--;
         }

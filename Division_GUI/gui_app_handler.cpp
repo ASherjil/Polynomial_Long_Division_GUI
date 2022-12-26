@@ -11,7 +11,11 @@ Gui_app_handler::Gui_app_handler()
     :m_divisor{new Divisor()}, m_displayResult{new QMessageBox{QMessageBox::NoIcon,
                                                                "Result",
                                                                "",
-                                                               QMessageBox::Cancel}} {}
+                                                               QMessageBox::Cancel}} {
+    QFont font = m_displayResult->font();
+    font.setPointSize(14);
+    m_displayResult->setFont(font);
+}
 
 void Gui_app_handler::parseInputData(QString &&repititions,
                                      QString &&numerator,
