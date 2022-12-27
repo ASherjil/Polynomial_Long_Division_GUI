@@ -45,6 +45,9 @@ void Gui_app_handler::parseInputData(QString &&repititions,
     int numPower = maxPower(_numerator);
     int denPower = maxPower(_denominator);
 
+    qDebug()<< "Numerator power: "<<numPower;
+    qDebug()<< "Denominator power: "<<denPower;
+
     // parse and store the input data into the member variables
     m_numerator   = parseInputData(_numerator);
     m_denominator = parseInputData(_denominator);
@@ -110,20 +113,19 @@ int Gui_app_handler::maxPower(const QString &num_den){
 
     for (startIndex = 0;startIndex<num_den.size(); ++startIndex){
         if (num_den[startIndex] == '^'){
-            if (num_den[startIndex+1] == '-'){
-                for (endIndex =startIndex+2; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
-                    ++endIndex){}
-                    startIndex++;
-                    break; // break out of the loop
-            }
-            else if (num_den[startIndex+1] == '+'){
-                for (endIndex =startIndex+2; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
+
+            if (num_den[startIndex+1] == '-' || num_den[startIndex+1] == '+'){
+                for (endIndex =startIndex+2; endIndex < num_den.size()&&
+                                             num_den[endIndex] != '+' &&
+                                             num_den[endIndex] != '-';
                     ++endIndex){}
                     startIndex++;
                     break; // break out of the loop
             }
             else{
-                for (endIndex =startIndex+1; num_den[endIndex] != '+'&& num_den[endIndex] != '-';
+                for (endIndex =startIndex+1; endIndex < num_den.size()&&
+                                             num_den[endIndex] != '+' &&
+                                             num_den[endIndex] != '-';
                     ++endIndex){}
                     startIndex++;
                     break; // break out of the loop
