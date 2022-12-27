@@ -95,26 +95,10 @@ QList<double> Gui_app_handler::parseInputData(QString &data)
 QChar Gui_app_handler::checkCoeff(const QString &num_den)
 {
     int coeffIndex{};
-    bool conversionSatus = true;
-    QChar plus  = '+';
-    QChar minus = '-';
-
-    if (num_den[0] == plus || num_den[0] == minus){
-        for (int i = 1;i<num_den.size();++i){
-            QString(num_den[i]).toInt(&conversionSatus, 10);
-            if (conversionSatus == false){ // the first non-number found
-                coeffIndex = i;
-                break;
-            }
-        }
-    }
-    else{
-        for (int i{};i<num_den.size();++i){
-            QString(num_den[i]).toInt(&conversionSatus, 10);
-            if (conversionSatus == false){ // the first non-number found
-                coeffIndex = i;
-                break;
-            }
+    for (int i{};i<num_den.size();++i){
+        if (num_den[i].isLetter()){
+            coeffIndex =i;
+            break;
         }
     }
     return num_den[coeffIndex];
