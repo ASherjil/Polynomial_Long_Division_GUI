@@ -152,7 +152,7 @@ int Gui_app_handler::maxPower(const QString &num_den){
 }
 
 bool Gui_app_handler::verifyPolynomial(const QString &polynomial){
-    const std::regex _regex("((-|\\+)?[0-9]+[a-z]\\^(-|\\+)?[0-9]+)+");
+    const std::regex _regex("((-|\\+)?[0-9]+(\\.[0-9]+)?[a-z]\\^(-|\\+)?[0-9])+");
     return regex_match(polynomial.toStdString(), _regex);
 }
 

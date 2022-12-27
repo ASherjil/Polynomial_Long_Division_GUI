@@ -77,7 +77,7 @@ void Divisor::performDivision()
 
             tempNum = tempNum - multipliedDenom;
 
-            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](double i) { return i == 0.0; });
+            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](double i) { return i == 0.00; });
 
             if (zeros){
                 break; // this division is complete
@@ -129,7 +129,7 @@ void Divisor::performDivision()
 
             tempNum = tempNum - multipliedDenom;
 
-            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](int i) { return i==0; });
+            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](double i) { return i==0.00; });
 
             if (zeros){
                 break; // this division is complete
@@ -179,7 +179,7 @@ void Divisor::performDivision()
 
             tempNum = tempNum - multipliedDenom;
 
-            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](int i) { return i==0; });
+            bool zeros = std::all_of(tempNum.begin(), tempNum.end(), [](double i) { return i==0.00; });
 
             if (zeros){
                 break; // this division is complete
