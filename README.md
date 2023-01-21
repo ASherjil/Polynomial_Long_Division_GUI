@@ -8,7 +8,7 @@ The user has to enter the numerator, denominator and the required number of quot
 This calculator can provide an arbitrary number of quotients. Moreover, decimal input for the polynomials is also accepted. This GUI app is written mostly in C++17 with the use of Qt framework. A backend algorithm was written in C++ to compute polynomial long division which took user input from the command line, that algorithm was refiened and turned into a GUI. 
 
 
-#Installation and usage(Windows only)
+# Installation and usage(Windows only)
 
 1- Please navigate towards the "Releases" section of the repository. Which is found here:
 https://github.com/areebTP/Polynomial_Long_Division_GUI/releases
