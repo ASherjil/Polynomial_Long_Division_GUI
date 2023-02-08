@@ -6,6 +6,12 @@
 #include "division.h"
 #include "qmessagebox.h"
 
+
+/**
+ * @brief The Gui_app_handler class Used for parsing the user input data. It
+ * checks whether the entered data is correct. When successfully parsed it passes the
+ * data into the Divisor object which is responsible for computation.
+ */
 class Gui_app_handler
 {
 public:
@@ -17,6 +23,7 @@ public:
      * @param repititions R-value reference received from the plaintext function
      * @param numerator   R-value reference received from the plaintext function
      * @param denominator R-value reference received from the plaintext function
+     * @param errorOutput A pointer to the label that is used to print error messages
      */
     void parseInputData(QString&& repititions,
                         QString&& numerator,
