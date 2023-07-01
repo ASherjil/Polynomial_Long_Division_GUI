@@ -17,6 +17,3 @@ https://github.com/areebTP/Polynomial_Long_Division_GUI/releases
 
 3- Once extracted run the executable file "Division_GUI.exe".
 
-A small how to use guide can be found here:
-
-https://vimeo.com/797090591
