@@ -11,7 +11,7 @@ This calculator can provide an arbitrary number of quotients. Moreover, decimal 
 # Installation and usage(Windows only)
 
 1- Please navigate towards the "Releases" section of the repository. Which is found here:
-https://github.com/areebTP/Polynomial_Long_Division_GUI/releases
+https://github.com/ASherjil/Polynomial_Long_Division_GUI/releases/tag/v0.0
 
 2- Download and extract the file "Division_GUI.zip". 
 
